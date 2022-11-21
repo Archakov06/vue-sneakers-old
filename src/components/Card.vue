@@ -6,24 +6,37 @@ defineProps<{
   imageUrl: string;
   isAdded?: boolean;
   isFavorite?: boolean;
+  onClickAdd?: (id: number) => void;
 }>();
 </script>
 
 <template>
   <div class="card">
     <div class="favorite">
-      <img v-if="!isFavorite" class="plus" src="../assets/unliked.svg" alt="Plus" />
+      <img
+        v-if="!isFavorite"
+        class="plus"
+        src="../assets/unliked.svg"
+        alt="Plus"
+      />
       <img v-else class="plus" src="../assets/liked.svg" alt="Added" />
     </div>
-    <img class="image" :src="imageUrl" alt="Sneakers" />
+    <img class="image" v-bind:src="'src/assets/' + imageUrl" alt="Sneakers" />
     <h5>{{ name }}</h5>
     <div class="details">
       <div class="price">
         <span>Цена:</span>
         <b>{{ price }} руб.</b>
       </div>
-      <img v-if="!isAdded" class="plus" src="../assets/btn-plus.svg" alt="Plus" />
-      <img v-else class="plus" src="../assets/btn-checked.svg" alt="Added" />
+      <div @click="onClickAdd(id)">
+        <img
+          v-if="!isAdded"
+          class="plus"
+          src="../assets/btn-plus.svg"
+          alt="Plus"
+        />
+        <img v-else class="plus" src="../assets/btn-checked.svg" alt="Added" />
+      </div>
     </div>
   </div>
 </template>

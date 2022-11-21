@@ -1,25 +1,49 @@
-<script setup lang="ts">
-import Header from './components/Header.vue';
-import Card from './components/Card.vue';
-</script>
+<script lang="ts">
+import Header from "./components/Header.vue";
+import Card from "./components/Card.vue";
 
-<script setup lang="ts">
-import { useProductsStore } from './stores/Products';
+import { useProductsStore } from "./stores/Products";
+import { myInjectionKey } from "./test";
 
-const store = useProductsStore();
+export default {
+  components: { Header, Card },
+  provide: {
+    [myInjectionKey]: "222",
+  },
+  setup() {
+    const store = useProductsStore();
 
-console.log(store);
+    store.fetchItems();
+
+    const onClickAdd = (id: number) => {
+      console.log(id);
+    };
+
+    return {
+      store,
+      onClickAdd,
+    };
+  },
+};
 </script>
 
 <template>
   <div class="app">
     <Header />
     <div class="products">
+      <div
+        v-if="store.isLoading"
+        v-for="item in [...Array(8)]"
+        class="card-skeleton"
+      />
       <Card
-        :id="0"
-        :price="1500"
-        name="Мужские Кроссовки Nike Blazer Mid Suede"
-        image-url="src/assets/sneakers/1.jpg"
+        v-for="item in store.items"
+        :key="item.id"
+        :id="item.id"
+        :price="item.price"
+        :name="item.title"
+        :image-url="item.imageUrl"
+        :on-click-add="onClickAdd"
       />
     </div>
   </div>
@@ -29,7 +53,7 @@ console.log(store);
 .app {
   width: 1080px;
   height: 100vh;
-  margin: 0 auto;
+  margin: 50px auto;
   background: #ffffff;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
@@ -42,5 +66,12 @@ console.log(store);
   grid-column-gap: 30px;
   grid-row-gap: 30px;
   padding: 50px;
+}
+
+.card-skeleton {
+  height: 333px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
 }
 </style>

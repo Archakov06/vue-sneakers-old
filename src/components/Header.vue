@@ -1,5 +1,16 @@
+<script lang="ts">
+import { myInjectionKey } from "../test";
+
+export default {
+  inject: {
+    test: { from: myInjectionKey },
+  },
+};
+</script>
+
 <template>
   <div class="header">
+    {{ test }}
     <div class="headerLeft">
       <img src="../assets/logo.png" width="40" height="40" />
       <div>
@@ -44,7 +55,7 @@
   h2 {
     font-size: 20px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   p {
