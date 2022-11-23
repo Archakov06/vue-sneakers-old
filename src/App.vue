@@ -1,27 +1,34 @@
 <script lang="ts">
 import Header from "./components/Header.vue";
-import Card from "./components/Card.vue";
+import Drawer from "./components/Drawer.vue";
 
 import { useProductsStore } from "./stores/Products";
-import { myInjectionKey } from "./test";
+import { useFavoriteStore } from "./stores/Favorites";
 
 export default {
-  components: { Header, Card },
-  provide: {
-    [myInjectionKey]: "222",
-  },
+  components: { Drawer, Header },
+  data: () => ({
+    cartVisible: false,
+  }),
   setup() {
-    const store = useProductsStore();
+    const productsStore = useProductsStore();
+    const favoriteStore = useFavoriteStore();
 
-    store.fetchItems();
+    productsStore.fetchItems();
 
-    const onClickAdd = (id: number) => {
-      console.log(id);
-    };
+    favoriteStore.$subscribe((mutation, state) => {
+      window.localStorage.setItem("favorites", JSON.stringify(state.items));
+    });
+
+    const favoritesLocalStore = window.localStorage.getItem("favorites");
+    const favorites = favoritesLocalStore
+      ? JSON.parse(favoritesLocalStore)
+      : [];
+
+    favoriteStore.setItems(favorites);
 
     return {
-      store,
-      onClickAdd,
+      favoriteStore,
     };
   },
 };
@@ -29,49 +36,31 @@ export default {
 
 <template>
   <div class="app">
-    <Header />
-    <div class="products">
-      <div
-        v-if="store.isLoading"
-        v-for="item in [...Array(8)]"
-        class="card-skeleton"
-      />
-      <Card
-        v-for="item in store.items"
-        :key="item.id"
-        :id="item.id"
-        :price="item.price"
-        :name="item.title"
-        :image-url="item.imageUrl"
-        :on-click-add="onClickAdd"
-      />
+    <Header :on-click-cart="() => (cartVisible = true)" />
+    <Drawer :on-close="() => (cartVisible = false)" :is-visible="cartVisible" />
+    <div class="content">
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .app {
   width: 1080px;
-  height: 100vh;
   margin: 50px auto;
   background: #ffffff;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
 }
-
 .products {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 30px;
   grid-row-gap: 30px;
-  padding: 50px;
 }
 
-.card-skeleton {
-  height: 333px;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.04);
-  border-radius: 40px;
+.content {
+  padding: 50px;
 }
 </style>

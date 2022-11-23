@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "macro-css": "^1.0.5",
     "pinia": "^2.0.23",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
-    "vue": "^3.2.41"
+    "vue": "^3.2.41",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.2.0",

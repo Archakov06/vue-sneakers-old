@@ -1,31 +1,41 @@
 <script lang="ts">
-import { myInjectionKey } from "../test";
+import { useCartStore } from "../stores/Cart";
 
 export default {
-  inject: {
-    test: { from: myInjectionKey },
+  props: {
+    onClickCart: Function,
+  },
+  setup() {
+    const cartStore = useCartStore();
+
+    return {
+      cartStore,
+    };
   },
 };
 </script>
 
 <template>
   <div class="header">
-    {{ test }}
     <div class="headerLeft">
-      <img src="../assets/logo.png" width="40" height="40" />
-      <div>
-        <h2>Vue Sneakers</h2>
-        <p>Магазин лучших кроссовок</p>
-      </div>
+      <router-link to="/">
+        <img src="../assets/logo.png" width="40" height="40" />
+        <div>
+          <h2>Vue Sneakers</h2>
+          <p>Магазин лучших кроссовок</p>
+        </div>
+      </router-link>
     </div>
     <div class="headerRight">
       <ul>
-        <li>
+        <li @click="onClickCart" class="cartButton">
           <img src="../assets/cart.svg" />
-          <span>1205 руб.</span>
+          <span>{{ cartStore.totalPrice }} руб.</span>
         </li>
         <li>
-          <img src="../assets/favorite.svg" />
+          <router-link to="/favorites">
+            <img src="../assets/favorite.svg" />
+          </router-link>
         </li>
         <li>
           <img src="../assets/user.svg" />
@@ -45,27 +55,31 @@ export default {
 }
 
 .headerLeft {
-  display: flex;
-  align-items: center;
+  a {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
 
-  img {
-    margin-right: 15px;
-  }
+    img {
+      margin-right: 15px;
+    }
 
-  h2 {
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: 700;
-  }
+    h2 {
+      font-size: 20px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
 
-  p {
-    color: #9d9d9d;
-    font-size: 14px;
-  }
+    p {
+      color: #9d9d9d;
+      font-size: 14px;
+    }
 
-  h2,
-  p {
-    margin: 0;
+    h2,
+    p {
+      margin: 0;
+    }
   }
 }
 
@@ -87,5 +101,9 @@ export default {
       }
     }
   }
+}
+
+.cartButton {
+  cursor: pointer;
 }
 </style>

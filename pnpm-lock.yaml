@@ -2,19 +2,23 @@ lockfileVersion: 5.4
 
 specifiers:
   '@vitejs/plugin-vue': ^3.2.0
+  macro-css: ^1.0.5
   pinia: ^2.0.23
   sass: ^1.56.1
   sass-loader: ^13.2.0
   typescript: ^4.6.4
   vite: ^3.2.3
   vue: ^3.2.41
+  vue-router: '4'
   vue-tsc: ^1.0.9
 
 dependencies:
+  macro-css: 1.0.5
   pinia: 2.0.23_d45o5shxrtvj6wh4y524t7cqnm
   sass: 1.56.1
   sass-loader: 13.2.0_sass@1.56.1
   vue: 3.2.44
+  vue-router: 4.1.6_vue@3.2.44
 
 devDependencies:
   '@vitejs/plugin-vue': 3.2.0_vite@3.2.3+vue@3.2.44
@@ -523,6 +527,10 @@ packages:
     engines: {node: '>= 8'}
     dev: false
 
+  /macro-css/1.0.5:
+    resolution: {integrity: sha512-2DctzCqUhoKRDwLxPYHHak6KHIB7pWgeWbtsPF+TJUYlrWtE1+/J1//Jrrim3UL5aeaZpOQ0V57THmIwHrtbkg==}
+    dev: false
+
   /magic-string/0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
     dependencies:
@@ -722,6 +730,15 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      vue: 3.2.44
+    dev: false
+
+  /vue-router/4.1.6_vue@3.2.44:
+    resolution: {integrity: sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.4.5
       vue: 3.2.44
     dev: false
 

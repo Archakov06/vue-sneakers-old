@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export interface Product {
   id: number;
-  name: string;
+  title: string;
   price: number;
   imageUrl: string;
   isAdded?: boolean;
@@ -16,13 +16,7 @@ interface State {
 
 export const useProductsStore = defineStore("products", {
   state: (): State => ({ items: [], isLoading: true }),
-  getters: {
-    totalPrice: (state) => state.items.reduce((sum, obj) => sum + obj.price, 0),
-  },
   actions: {
-    addToCard(item: Product) {
-      this.items.push(item);
-    },
     async fetchItems() {
       this.isLoading = true;
 

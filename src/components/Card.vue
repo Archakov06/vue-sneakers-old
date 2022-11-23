@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { Product } from "../stores/Products";
+
 defineProps<{
   id: number;
   name: string;
@@ -6,13 +8,17 @@ defineProps<{
   imageUrl: string;
   isAdded?: boolean;
   isFavorite?: boolean;
-  onClickAdd?: (id: number) => void;
+  onClickAdd?: (item: Product) => void;
+  onClickFavorite?: (item: Product) => void;
 }>();
 </script>
 
 <template>
   <div class="card">
-    <div class="favorite">
+    <div
+      class="favorite"
+      @click="onClickFavorite({ id, imageUrl, name, price })"
+    >
       <img
         v-if="!isFavorite"
         class="plus"
@@ -28,7 +34,7 @@ defineProps<{
         <span>Цена:</span>
         <b>{{ price }} руб.</b>
       </div>
-      <div @click="onClickAdd(id)">
+      <div @click="onClickAdd({ id, imageUrl, name, price })">
         <img
           v-if="!isAdded"
           class="plus"
