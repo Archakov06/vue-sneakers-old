@@ -37,16 +37,16 @@ export default {
           <div
             v-for="item in cartStore.items"
             key="item.id"
-            class="cartItem d-flex align-center mb-20"
+            class="cartItem mb-20"
           >
-            <div
-              v-bind:style="'src/assets/' + item.imageUrl"
+            <img
+              v-bind:src="'src/assets/' + item.imageUrl"
               class="cartItemImg"
-            ></div>
+            />
 
-            <div class="mr-20 flex">
-              <p class="mb-5">{{ item.title }}</p>
-              <b>{{ item.title }} руб.</b>
+            <div>
+              <p class="cartItemTitle mb-5">{{ item.title }}</p>
+              <b>{{ item.price }} руб.</b>
             </div>
             <img
               class="removeBtn"
@@ -79,7 +79,7 @@ export default {
 
 <style lang="scss" scoped>
 .overlay {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
@@ -90,6 +90,17 @@ export default {
   opacity: 0;
   transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
   overflow: hidden;
+}
+
+.cartItem {
+  display: grid;
+  grid-template-columns: 80px auto 32px;
+}
+
+.cartItemImg {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
 }
 
 .overlayVisible {
@@ -123,5 +134,12 @@ export default {
   h2 {
     margin: 0;
   }
+}
+
+.cartItemTitle {
+  width: 250px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 </style>
