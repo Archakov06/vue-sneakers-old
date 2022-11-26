@@ -29,7 +29,7 @@ defineProps<{
       />
       <img v-else class="plus" src="../assets/liked.svg" alt="Added" />
     </div>
-    <img class="image" v-bind:src="'src/assets/' + imageUrl" alt="Sneakers" />
+    <img class="image" v-bind:src="'/' + imageUrl" alt="Sneakers" />
     <h5>{{ name }}</h5>
     <div class="details">
       <div class="price">
