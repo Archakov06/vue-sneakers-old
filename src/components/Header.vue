@@ -1,18 +1,40 @@
 <script lang="ts">
 import { useCartStore } from "../stores/Cart";
+import { CountUp } from "countup.js";
+import { computed, defineComponent, ref } from "vue";
 
-export default {
+export default defineComponent({
   props: {
     onClickCart: Function,
+  },
+  watch: {
+    totalPrice(val: number) {
+      if (this.countUpRef) {
+        this.countUpRef.update(val);
+      }
+    },
+  },
+  mounted() {
+    this.countUpRef = new CountUp(this.totalPriceRef, 0, {
+      duration: 1,
+    });
+    this.countUpRef.start();
   },
   setup() {
     const cartStore = useCartStore();
 
+    const totalPrice = computed(() => cartStore.totalPrice);
+
+    const totalPriceRef = ref<HTMLSpanElement | null>(null);
+    const countUpRef = ref<CountUp | null>(null);
+
     return {
-      cartStore,
+      totalPrice,
+      totalPriceRef,
+      countUpRef,
     };
   },
-};
+});
 </script>
 
 <template>
@@ -30,7 +52,7 @@ export default {
       <ul>
         <li @click="onClickCart" class="cartButton">
           <img src="../assets/cart.svg" />
-          <span>{{ cartStore.totalPrice }} руб.</span>
+          <span><span ref="totalPriceRef" /> руб.</span>
         </li>
         <li>
           <router-link to="/favorites">

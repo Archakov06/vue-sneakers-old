@@ -1,7 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/countup.js': ^2.0.4
   '@vitejs/plugin-vue': ^3.2.0
+  countup.js: ^2.3.2
   macro-css: ^1.0.5
   pinia: ^2.0.23
   sass: ^1.56.1
@@ -13,6 +15,8 @@ specifiers:
   vue-tsc: ^1.0.9
 
 dependencies:
+  '@types/countup.js': 2.0.4
+  countup.js: 2.3.2
   macro-css: 1.0.5
   pinia: 2.0.23_d45o5shxrtvj6wh4y524t7cqnm
   sass: 1.56.1
@@ -68,6 +72,13 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@types/countup.js/2.0.4:
+    resolution: {integrity: sha512-ffAN1IyeKwzzthP5aSwg30Xrhn0ZbSEPXC9t5+/rvhDpjbWpzxInv0F4iQmB4nybS+ZxX1IGDiff/xOs0BvcRQ==}
+    deprecated: This is a stub types definition. countup.js provides its own type definitions, so you do not need this installed.
+    dependencies:
+      countup.js: 2.3.2
+    dev: false
 
   /@vitejs/plugin-vue/3.2.0_vite@3.2.3+vue@3.2.44:
     resolution: {integrity: sha512-E0tnaL4fr+qkdCNxJ+Xd0yM31UwMkQje76fsDVBBUCoGOUPexu2VDUYHL8P4CwV+zMvWw6nlRw19OnRKmYAJpw==}
@@ -237,6 +248,10 @@ packages:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.2
+
+  /countup.js/2.3.2:
+    resolution: {integrity: sha512-dQ7F/CmKGjaO6cDfhtEXwsKVlXIpJ89dFs8PvkaZH9jBVJ2Z8GU4iwG/qP7MgY8qwr+1skbwR6qecWWQLUzB8Q==}
+    dev: false
 
   /csstype/2.6.21:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==}

@@ -1,7 +1,9 @@
 <script lang="ts">
 import { useCartStore } from "../stores/Cart";
+import Info from "./Info.vue";
 
 export default {
+  components: { Info },
   props: {
     isVisible: Boolean,
     onClose: Function,
@@ -32,7 +34,7 @@ export default {
         />
       </h2>
 
-      <div class="d-flex flex-column flex">
+      <div v-if="cartStore.totalPrice > 0" class="d-flex flex-column flex">
         <div class="items flex">
           <div
             v-for="item in cartStore.items"
@@ -73,6 +75,14 @@ export default {
           </button>
         </div>
       </div>
+
+      <Info
+        v-if="cartStore.totalPrice === 0"
+        title="Корзина пустая"
+        description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+        image="src/assets/empty-cart.jpg"
+        :on-click-button="onClose"
+      />
     </div>
   </div>
 </template>
@@ -115,6 +125,7 @@ export default {
 .drawer {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   position: absolute;
   width: 420px;
   height: 100%;
