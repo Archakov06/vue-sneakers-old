@@ -8,7 +8,7 @@ defineProps<{
   imageUrl: string;
   isAdded?: boolean;
   isFavorite?: boolean;
-  onClickAdd?: (item: Product) => void;
+  onClickAdd?: (item: Partial<Product>) => void;
   onClickFavorite?: (item: Product) => void;
 }>();
 </script>
@@ -17,7 +17,9 @@ defineProps<{
   <div class="card">
     <div
       class="favorite"
-      @click="onClickFavorite({ id, imageUrl, name, price })"
+      @click="
+        onClickFavorite?.({ id: Number(id), imageUrl, title: name, price })
+      "
     >
       <img
         v-if="!isFavorite"
@@ -34,7 +36,9 @@ defineProps<{
         <span>Цена:</span>
         <b>{{ price }} руб.</b>
       </div>
-      <div @click="onClickAdd({ id, imageUrl, name, price })">
+      <div
+        @click="onClickAdd?.({ id: Number(id), imageUrl, title: name, price })"
+      >
         <img
           v-if="!isAdded"
           class="plus"

@@ -10,7 +10,7 @@ export const useFavoriteStore = defineStore("favorite", {
   getters: {
     isFavorite: (state) => {
       return (id: number) => {
-        return Boolean(state.items.find((o) => o.id === id));
+        return state.items.some((o) => o.id === id);
       };
     },
   },

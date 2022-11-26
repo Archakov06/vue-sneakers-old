@@ -1,21 +1,14 @@
-<script lang="ts">
+<script lang="ts" setup>
+import { defineProps } from "vue";
 import { useCartStore } from "../stores/Cart";
 import Info from "./Info.vue";
 
-export default {
-  components: { Info },
-  props: {
-    isVisible: Boolean,
-    onClose: Function,
-  },
-  setup() {
-    const cartStore = useCartStore();
+defineProps<{
+  isVisible: boolean;
+  onClose: VoidFunction;
+}>();
 
-    return {
-      cartStore,
-    };
-  },
-};
+const cartStore = useCartStore();
 </script>
 
 <template>
@@ -29,7 +22,7 @@ export default {
         <img
           @click="onClose"
           class="cu-p"
-          src="src/assets/btn-remove.svg"
+          src="../assets/btn-remove.svg"
           alt="Close"
         />
       </h2>
@@ -52,7 +45,7 @@ export default {
             </div>
             <img
               class="removeBtn"
-              src="src/assets/btn-remove.svg"
+              src="../assets/btn-remove.svg"
               alt="Remove"
             />
           </div>
@@ -70,8 +63,8 @@ export default {
               <b>{{ (cartStore.totalPrice / 100) * 5 }} руб. </b>
             </li>
           </ul>
-          <button onClick="{onClickOrder}" class="greenButton">
-            Оформить заказ <img src="src/assets/arrow.svg" alt="Arrow" />
+          <button class="greenButton">
+            Оформить заказ <img src="../assets/arrow.svg" alt="Arrow" />
           </button>
         </div>
       </div>
@@ -80,7 +73,7 @@ export default {
         v-if="cartStore.totalPrice === 0"
         title="Корзина пустая"
         description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
-        image="src/assets/empty-cart.jpg"
+        image="../assets/empty-cart.jpg"
         :on-click-button="onClose"
       />
     </div>

@@ -3,7 +3,8 @@ import * as VueRouter from "vue-router";
 import { createPinia } from "pinia";
 
 import Home from "./pages/Home.vue";
-import Favorites from "./pages/Favorites.vue";
+
+const Favorites = () => import("./pages/Favorites.vue");
 
 import "macro-css";
 import "./style.scss";

@@ -1,11 +1,12 @@
 <script lang="ts">
 import { useCartStore } from "../stores/Cart";
+// @ts-ignore
 import { CountUp } from "countup.js";
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 
 export default defineComponent({
   props: {
-    onClickCart: Function,
+    onClickCart: Function as PropType<(payload: MouseEvent) => void>,
   },
   watch: {
     totalPrice(val: number) {
@@ -15,10 +16,11 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.countUpRef = new CountUp(this.totalPriceRef, 0, {
-      duration: 1,
-    });
-    this.countUpRef.start();
+    if (this.totalPriceRef) {
+      this.countUpRef = new CountUp(this.totalPriceRef, 0, {
+        duration: 1,
+      });
+    }
   },
   setup() {
     const cartStore = useCartStore();

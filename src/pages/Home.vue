@@ -48,12 +48,12 @@ export default defineComponent({
       {{ searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки" }}
     </h1>
     <div className="search-block d-flex">
-      <img src="src/assets/search.svg" alt="Search" />
+      <img src="../assets/search.svg" alt="Search" />
       <img
         v-if="searchValue"
         className="clear
       cu-p"
-        src="src/assets/btn-remove.svg"
+        src="../assets/btn-remove.svg"
         @click="clearSearchValue"
         alt="Clear"
       />
