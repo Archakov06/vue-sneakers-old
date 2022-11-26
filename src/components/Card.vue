@@ -2,7 +2,7 @@
 import { Product } from "../stores/Products";
 
 defineProps<{
-  id: number;
+  id: number | string;
   name: string;
   price: number;
   imageUrl: string;
